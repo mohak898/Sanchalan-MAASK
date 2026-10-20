@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SANCHALAN: hands-free browsing for motor disabilities</title>
+<meta name="description" content="SANCHALAN is a Chrome extension that lets you browse with head tracking, voice and an on-screen keyboard. Install guide and evaluation page.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: light dark;
+  --bg: #f4f8fb;
+  --surface: #ffffff;
+  --text: #16222d;
+  --muted: #4d5f6e;
+  --line: #d3dfe8;
+  --accent: #14708f;
+  --accent-ink: #ffffff;
+  --ring: #f0a23b;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1a22;
+    --surface: #162530;
+    --text: #e8f0f5;
+    --muted: #9fb3c2;
+    --line: #28404f;
+    --accent: #4fb6d6;
+    --accent-ink: #08212b;
+    --ring: #f0a23b;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+main { max-width: 46rem; margin: 0 auto; padding: 4rem 1.25rem 3rem; }
+h1 { font-size: clamp(2.6rem, 8vw, 4rem); line-height: 1.05; margin: 0 0 1rem; letter-spacing: 0.01em; }
+h2 { font-size: 1.5rem; line-height: 1.25; margin: 3.25rem 0 0.75rem; }
+p { margin: 0 0 1rem; max-width: 40rem; }
+.lead { font-size: 1.25rem; color: var(--muted); max-width: 34rem; }
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, .btn:focus-visible { outline: 3px solid var(--ring); outline-offset: 3px; }
+code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 0.92em;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 0.08em 0.4em;
+  word-break: break-all;
+}
+.actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin: 1.75rem 0 0.6rem; }
+.btn {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  padding: 0.85rem 1.4rem;
+  border-radius: 8px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+  isolation: isolate;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--ring);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0s;
+}
+.btn.primary:hover::before { transform: scaleX(1); transition: transform 600ms linear; }
+.btn.primary:hover { color: #1d1400; }
+.note { font-size: 0.95rem; color: var(--muted); }
+figure { margin: 2.5rem 0 0; }
+figure img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 10px; }
+figcaption { font-size: 0.95rem; color: var(--muted); margin-top: 0.6rem; }
+.callout {
+  background: var(--surface);
+  border-left: 4px solid var(--accent);
+  border-radius: 0 8px 8px 0;
+  padding: 1.1rem 1.3rem 0.4rem;
+  margin: 1rem 0 1.25rem;
+}
+ol, ul { padding-left: 1.3rem; max-width: 40rem; }
+li { margin-bottom: 0.6rem; }
+.flags li { margin-bottom: 0.35rem; }
+footer { border-top: 1px solid var(--line); margin-top: 4rem; padding-top: 1.5rem; color: var(--muted); font-size: 0.95rem; }
+footer p { margin-bottom: 0.4rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .btn.primary:hover::before { transition: none; }
+}
+</style>
+</head>
+<body>
+<main>
+  <h1>SANCHALAN</h1>
+  <p class="lead">Browse the web with your head, your voice and an on-screen keyboard. No hands and no special hardware, just a webcam.</p>
+
+  <div class="actions">
+    <a class="btn primary" href="https://github.com/Anshul-Kumar35/SANCHALAN/archive/refs/heads/main.zip">Download the extension</a>
+    <a class="btn" href="https://github.com/Anshul-Kumar35/SANCHALAN">View source on GitHub</a>
+  </div>
+  <p class="note">Hold your pointer on the first button. It fills in 600 ms, the same dwell time the extension uses. Clicking works too.</p>
+
+  <figure>
+    <img src="https://raw.githubusercontent.com/Anshul-Kumar35/SANCHALAN/main/screenshot.png" alt="SANCHALAN running on a Wikipedia page, with a link summary tooltip, the head pointer preview and the settings side panel" loading="lazy">
+    <figcaption>SANCHALAN on a Wikipedia page: head pointer, link summary and settings panel.</figcaption>
+  </figure>
+
+  <h2>Why there is no live demo on this page</h2>
+  <div class="callout">
+    <p>SANCHALAN is a Chrome extension, and it cannot run as a normal website. A web page can only see and control itself. SANCHALAN has to work on every site you visit, so it needs abilities that Chrome gives only to installed extensions:</p>
+  </div>
+  <ul>
+    <li>Switching, closing and reloading browser tabs, and going back or forward.</li>
+    <li>Typing and pasting into text fields on other websites, and reading the clipboard.</li>
+    <li>Running a side panel and an on-screen keyboard next to any page.</li>
+    <li>Keeping the microphone and camera pipelines alive in the background.</li>
+  </ul>
+  <p>It also uses Chrome’s built-in AI (Gemini Nano) to summarize links on the device, which needs Chrome Dev or Canary. Publishing to the Chrome Web Store needs a paid developer account and a review period, so for this evaluation we share the build directly. Installing takes about a minute, and the camera and microphone never send anything to our servers.</p>
+
+  <h2>Install it in five steps</h2>
+  <ol>
+    <li>Open <strong>Chrome Dev</strong> or <strong>Chrome Canary</strong>, version 128 or later.</li>
+    <li>Turn on three flags, then restart Chrome. Paste each address into the address bar:
+      <ul class="flags">
+        <li><code>chrome://flags/#optimization-guide-on-device-model</code> set to Enabled BypassPerfRequirement</li>
+        <li><code>chrome://flags/#prompt-api-for-gemini-nano</code> set to Enabled</li>
+        <li><code>chrome://flags/#summarization-api-for-gemini-nano</code> set to Enabled</li>
+      </ul>
+    </li>
+    <li>Download the zip with the button above and unzip it.</li>
+    <li>Open <code>chrome://extensions</code>, switch on Developer mode, choose Load unpacked, and select the unzipped SANCHALAN folder.</li>
+    <li>Click the SANCHALAN icon, allow camera access, then calibrate with <code>Alt+H</code> for head tracking and <code>Alt+M</code> for mouth click.</li>
+  </ol>
+  <p class="note">The AI model downloads once and can take 5 to 10 minutes. Summaries start working after that.</p>
+
+  <h2>What to try once it is running</h2>
+  <ul>
+    <li>Move your head to steer the pointer, and hold it on a link for 600 ms to see an on-device summary.</li>
+    <li>Open your mouth to click, or let the dwell ring fill on a button.</li>
+    <li>Say “sanchalan next tab” or “sanchalan new tab” to control the browser by voice.</li>
+    <li>Open the on-screen keyboard at the side and type using the same head and mouth controls.</li>
+    <li>Click a text field, say “start dictation”, and speak. Say “stop dictation” to finish.</li>
+  </ul>
+
+  <h2>Demo video</h2>
+  <p>A recorded walkthrough of the working model: <a id="demo-link" href="REPLACE_WITH_DEMO_VIDEO_URL">Watch the demo video</a></p>
+
+  <footer>
+    <p><strong>Team MAASK:</strong> Mohak Gupta (team leader), Anurag Kumar, Anshul Kumar, Saket Kumar.</p>
+    <p>Open source software. Source code is on <a href="https://github.com/Anshul-Kumar35/SANCHALAN">GitHub</a>.</p>
+  </footer>
+</main>
+</body>
+</html>
